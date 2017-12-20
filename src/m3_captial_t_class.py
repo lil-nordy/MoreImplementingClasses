@@ -2,8 +2,8 @@
 A   CapitalT   class and methods that use the Cross class.
 
 Authors: David Mutchler, Dave Fisher, Valerie Galluzzi, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues and Nathaniel N Nordquist, Nate.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import rosegraphics as rg
 
@@ -13,11 +13,11 @@ def main():
     # --------------------------------------------------------------
     #   Uncomment only 1 test at a time as you develop your code.
     # --------------------------------------------------------------
-
+    #
     # run_test_simple_t()
     # run_test_set_colors()
     # run_test_move_by()
-    # run_test_clone()
+    run_test_clone()
 
 
 def run_test_simple_t():
@@ -135,11 +135,23 @@ class CapitalT(object):
           :type letter_thickness:   int
         """
         # --------------------------------------------------------------
-        # TODO: 3.
+        # DONE: 3.
         #   READ the above specification, including the Example.
         #   Implement this method
         #   Note: you will need to also implement attach_to before testing
         # --------------------------------------------------------------
+        self.center = intersection_center
+        self.width = width
+        self.height = height
+        self.thickness = letter_thickness
+        self.top_corner = rg.Point(intersection_center.x - .5*self.width, intersection_center.y + .5*self.thickness)
+        self.bottom_corner = rg.Point(intersection_center.x + .5*self.width, intersection_center.y - .5*self.thickness)
+        self.upper_corner = rg.Point(intersection_center.x - .5*letter_thickness, intersection_center.y +
+                                 .5*letter_thickness)
+        self.lower_corner = rg.Point(intersection_center.x + .5*letter_thickness, intersection_center.y + height -
+                                .5*letter_thickness)
+        self.h_rect = rg.Rectangle(self.top_corner, self.bottom_corner)
+        self.v_rect = rg.Rectangle(self.upper_corner, self.lower_corner)
 
     def attach_to(self, window):
         """
@@ -160,11 +172,13 @@ class CapitalT(object):
           :type window: rg.RoseWindow
         """
         # --------------------------------------------------------------
-        # TODO: 4.
+        # DONE: 4.
         #   READ the above specification, including the Example.
         #   Implement and test this method by looking at the console and
         #     the graphics window (compare it to simple_t.pdf)
         # --------------------------------------------------------------
+        self.v_rect.attach_to(window)
+        self.h_rect.attach_to(window)
 
     def set_colors(self, fill_color, outline_color):
         """
@@ -187,12 +201,16 @@ class CapitalT(object):
           :type outline_color: str
         """
         # --------------------------------------------------------------
-        # TODO: 5.
+        # DONE: 5.
         #   READ the above specification, including the Example.
         #   Implement and test this method by uncommenting the appropriate
         #     run_test method in main. Compare the graphics window to
         #     set_colors.pdf.
         # --------------------------------------------------------------
+        self.v_rect.fill_color = fill_color
+        self.h_rect.fill_color = fill_color
+        self.v_rect.outline_color = outline_color
+        self.h_rect.outline_color = outline_color
 
     def move_by(self, dx, dy):
         """
@@ -217,13 +235,21 @@ class CapitalT(object):
           :type dy: int
         """
         # --------------------------------------------------------------
-        # TODO: 6.
+        # done: 6.
         #   READ the above specification, including the Example.
         #   Implement and test this method by uncommenting the appropriate
         #     run_test method in main. Compare the graphics window to
         #     move_by.pdf. Note: the pdf shows the different locations
         #     that the T moves through, but there is only 1 T at any moment.
         # --------------------------------------------------------------
+        self.h_rect.move_by(dx, dy)
+        self.v_rect.move_by(dx, dy)
+        # the move_by method already exists in rosegraphics. It moves the corners. I was trying to implement it by
+        # moving the center.
+        # self.corner_1.x += dx
+        # self.corner_1.y += dy
+        # self.corner_2.x += dx
+        # self.corner_2.y += dy.
 
     def clone(self):
         """
@@ -245,13 +271,17 @@ class CapitalT(object):
           :rtype: CapitalT
         """
         # --------------------------------------------------------------
-        # TODO: 7.
+        # DONE: 7.
         #   READ the above specification, including the Example.
         #   Implement and test this method by uncommenting the appropriate
         #     run_test method in main. Compare the graphics window to
         #     clone.pdf.
         # --------------------------------------------------------------
-
+        new_T = CapitalT(self.center, self.width, self.height, self.thickness)
+        new_T.set_colors(self.v_rect.fill_color, self.v_rect.outline_color)
+        return new_T
+        # new_h = self.hrect
+        # new_v = self.vrect
 
 # ----------------------------------------------------------------------
 # If this module is running at the top level (as opposed to being
