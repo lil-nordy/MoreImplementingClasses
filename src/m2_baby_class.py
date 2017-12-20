@@ -2,8 +2,8 @@
 A   Baby   class and methods that use the Baby class.
 
 Authors: David Mutchler, Dave Fisher, Valerie Galluzzi, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues and Nathaniel N Nordquist.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 
 def main():
@@ -39,7 +39,7 @@ def main():
 
 
 # ----------------------------------------------------------------------
-# TODO: 2. Implement a class called   Baby   that has a constructor and
+# DONE: 2. Implement a class called   Baby   that has a constructor and
 #   two methods, as described below.  Your finished Baby class should
 #   cause the code above to display the expected output.  Hint: Your
 #   class will need instance variables that you must figure out.
@@ -89,16 +89,36 @@ def main():
 #          """ Brief description of what objects of the class 'are'. """
 #
 ########################################################################
+# TODO: Read about string formatting.
 
+class Baby(object):
 
+    def __init__(self, string):
+        self.baby_name = string
+        print('Hello, baby %s!' % self.baby_name)
+        self.time_since_fed = 0
 
+    def feed_baby(self):
+        print('Thank you for feeding baby %s' % self.baby_name)
+        # if self.time_since_fed > 0:
+        self.time_since_fed = 0
+        # wrong: self.time_since_fed -= 1. No kidding. Oops.
 
-
-
+    def hour_passes(self):
+        if self.time_since_fed == 0:
+            print('Baby %s is sleeping.' % self.baby_name)
+        elif self.time_since_fed == 1:
+            print('Baby %s is awake. Time for food.' % self.baby_name)
+        elif self.time_since_fed >= 2:
+            print('Baby %s is CRYING uncontrollably! Feed the Baby!' % self.baby_name)
+        self.time_since_fed += 1
+# unsure why if == 1: ... if >= 2: didn't complete to specification
 
 # ----------------------------------------------------------------------
 # If this module is running at the top level (as opposed to being
 # imported by another module), then call the 'main' function.
 # ----------------------------------------------------------------------
+
+
 if __name__ == '__main__':
     main()
