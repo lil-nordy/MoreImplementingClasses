@@ -5,6 +5,9 @@ NOTE: This is NOT rosegraphics -- it is your OWN Line class.
 Authors: David Mutchler, Dave Fisher, Valerie Galluzzi, Amanda Stouder,
          their colleagues and Nathaniel Nordquist, Nate.
 """  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
+# TODO: Ask your professor what in the hell was going on with MoreClasses, MoreClasses1.0. Prediction: This will not
+# commit, since it was the forking process that I was having trouble with. having trouble forking. It deletes some of the .py files in the src folder.
+# pushing issue? 
 
 import math
 import m1t_test_Line as m1t
